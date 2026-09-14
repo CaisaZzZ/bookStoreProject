@@ -41,6 +41,13 @@ public class BookController {
         return "addbook";  //bookform.html
     }
 
+        @GetMapping("/edit/{id}")
+        public String editBook(@PathVariable("id") Long bookId, Model model) {
+        Book book = bookRepository.findById(bookId).get();
+        model.addAttribute("book", book);
+        return "addbook";
+        }
+
     @PostMapping("/savebook")
     public String saveBook(@ModelAttribute Book book) {
         bookRepository.save(book);
@@ -54,3 +61,4 @@ public class BookController {
     }
 
 }
+

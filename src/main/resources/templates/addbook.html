@@ -8,6 +8,9 @@
 <body>
     <h1>Add Book</h1>
     <form action="#" th:action="@{/savebook}" th:object="${book}" method="post">
+
+        <input type="hidden" th:field="*{id}" />
+
     <p>Author: <input type ="text" th:field="${book.author}" /></p>
     <p>Title: <input type ="text" th:field="${book.title}" /></p>
     <p>ISBN: <input type ="text" th:field="${book.isbn}" /></p>
