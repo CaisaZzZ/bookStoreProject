@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import backendproject.bookstore.domain.Book;
 import backendproject.bookstore.domain.BookRepository;
@@ -31,4 +34,23 @@ public class BookController {
         model.addAttribute("books", books);
         return "booklist";
     }
+
+    @GetMapping("/addbook")
+    public String getNewBookForm(Model model) {
+        model.addAttribute("book", new Book());
+        return "addbook";  //bookform.html
+    }
+
+    @PostMapping("/savebook")
+    public String saveBook(@ModelAttribute Book book) {
+        bookRepository.save(book);
+        return "redirect:/booklist";
+    }
+
+    @GetMapping("/deletebook/{id}")
+    public String deleteBook(@PathVariable ("id") Long bookId) {
+        bookRepository.deleteById(bookId);
+        return "redirect:/booklist";
+    }
+
 }
