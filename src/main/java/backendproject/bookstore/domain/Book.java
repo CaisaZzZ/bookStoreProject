@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+
 
 @Entity
 public class Book {
@@ -15,6 +18,10 @@ public class Book {
     private String publicationYear;
     private String isbn;
     private Float price;
+
+    @ManyToOne
+    @JoinColumn(name = "categoryid")
+    private Category category;
 
     // constructors
     public Book(String title, String author, String publicationYear, String isbn, Float price) {
