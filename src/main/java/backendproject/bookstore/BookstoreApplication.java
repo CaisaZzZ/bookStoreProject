@@ -21,17 +21,7 @@ public class BookstoreApplication {
     public CommandLineRunner demo(BookRepository repository, CategoryRepository categoryRepository) {
         return (args) -> {
 
-            Book a = new Book(
-                    "Narnia",
-                    "C.S.Lewis",
-                    "1955",
-                    "951-1-20526-9",
-                    39.50f);
-
-            repository.save(a);
-
-            // Categorioita
-
+            // Categories
             Category scifi = new Category("Scifi");
             Category fantasy = new Category("Fantasy");
             Category children = new Category("Children");
@@ -40,9 +30,16 @@ public class BookstoreApplication {
             categoryRepository.save(fantasy);
             categoryRepository.save(children);
 
-categoryRepository.findAll().forEach(category ->
-    System.out.println(category.getName())
-);
+            //books
+            Book a = new Book(
+                    "Narnia",
+                    "C.S.Lewis",
+                    "1955",
+                    "951-1-20526-9",
+                    39.50f);
+
+            a.setCategory(fantasy);
+            repository.save(a);
 
         };
     }

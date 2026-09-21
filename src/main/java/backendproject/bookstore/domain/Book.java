@@ -41,6 +41,7 @@ public class Book {
 
     }
 
+    //ID
     public Long getId() {
         return id;
     }
@@ -49,6 +50,7 @@ public class Book {
         this.id = id;
     }
 
+    //Title
     public String getTitle() {
         return title;
     }
@@ -57,6 +59,7 @@ public class Book {
         this.title = title;
     }
 
+    //Author
     public String getAuthor() {
         return author;
     }
@@ -65,6 +68,7 @@ public class Book {
         this.author = author;
     }
 
+    //Publication Year
     public String getPublicationYear() {
         return publicationYear;
     }
@@ -73,6 +77,7 @@ public class Book {
         this.publicationYear = publicationYear;
     }
 
+    //ISBN
     public String getIsbn() {
         return isbn;
     }
@@ -81,6 +86,7 @@ public class Book {
         this.isbn = isbn;
     }
 
+    //price
     public Float getPrice() {
         return price;
     }
@@ -89,6 +95,7 @@ public class Book {
         this.price = price;
     }
 
+    //category
     public Category getCategory() {
         return category;
     }
