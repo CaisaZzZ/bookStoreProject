@@ -8,21 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import backendproject.bookstore.domain.Book;
 import backendproject.bookstore.domain.BookRepository;
 import backendproject.bookstore.domain.CategoryRepository;
-
-
+import backendproject.bookstore.domain.Category;
 
 @Controller
 public class BookController {
 
     private CategoryRepository categoryRepository;
+    private BookRepository bookRepository;
 
-    BookRepository bookRepository;
-
-    public BookController(BookRepository bookRepository, CategoryRepository categoryRepository){
+    public BookController(BookRepository bookRepository, CategoryRepository categoryRepository) {
         this.bookRepository = bookRepository;
         this.categoryRepository = categoryRepository;
     }
@@ -34,7 +33,7 @@ public class BookController {
 
     @GetMapping("/booklist")
     public String bookController(Model model) {
-        List<Book> books =(List<Book>) bookRepository.findAll();
+        List<Book> books = (List<Book>) bookRepository.findAll();
         model.addAttribute("books", books);
         return "booklist";
     }
@@ -43,27 +42,28 @@ public class BookController {
     public String getNewBookForm(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
-        return "addbook";  //bookform.html
+        return "addbook"; // bookform.html
     }
 
-        @GetMapping("/edit/{id}")
-        public String editBook(@PathVariable("id") Long bookId, Model model) {
+    @GetMapping("/edit/{id}")
+    public String editBook(@PathVariable("id") Long bookId, Model model) {
         Book book = bookRepository.findById(bookId).get();
         model.addAttribute("book", book);
         return "addbook";
-        }
+    }
 
     @PostMapping("/savebook")
-    public String saveBook(@ModelAttribute Book book) {
+    public String saveBook(@ModelAttribute Book book, @RequestParam Long category) {
+        Category selectedCategory = categoryRepository.findById(category).get();
+        book.setCategory(selectedCategory);
         bookRepository.save(book);
         return "redirect:/booklist";
     }
 
     @GetMapping("/deletebook/{id}")
-    public String deleteBook(@PathVariable ("id") Long bookId) {
+    public String deleteBook(@PathVariable("id") Long bookId) {
         bookRepository.deleteById(bookId);
         return "redirect:/booklist";
     }
 
 }
-
