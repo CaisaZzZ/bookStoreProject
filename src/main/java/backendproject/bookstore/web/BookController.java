@@ -66,4 +66,9 @@ public class BookController {
         return "redirect:/booklist";
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";  //login.html
+    }
+
 }

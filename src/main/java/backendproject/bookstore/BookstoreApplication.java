@@ -38,8 +38,18 @@ public class BookstoreApplication {
                     "951-1-20526-9",
                     39.50f);
 
-            a.setCategory(fantasy);
+            Book b = new Book(
+                    "Taru Sormusten Herrasta",
+                    "J.R.R.Tolkien",
+                    "1954",
+                    "951-0-13208-X",
+                    39.95f);
+
+            a.setCategory(children);
+            b.setCategory(fantasy);
+
             repository.save(a);
+            repository.save(b);
 
         };
     }
